@@ -3,42 +3,60 @@ const React = require('react')
 
 const Form = React.createClass({
 
-    getInitialState: function(){
-      return {title: '',link: ''}
+    getInitialState: _ => ({
+        title: '',
+        link: '',
+        score: 1
+    }),
+    setTitle: function(e) {
+        this.setState({
+            title: e.target.value,
+            link: this.state.link
+        })
+
     },
-    onSubmit: function(e){
-      e.preventDefault()
-      console.log()
+    setLink: function(e) {
+        this.setState({
+            title: this.state.title,
+            link: e.target.value
+        })
     },
-    updateTitleVal: function(evt){
-      this.setState({
-        title: evt.target.value
-      })
+    onSubmit: function(e) {
+        e.preventDefault()
+        this.props.onAddArticle(this.state)
+        this.setState({
+            title: '',
+            link: '',
+            score: 1
+        })
     },
-    updateLinkVal: function(evt){
-      this.setState({
-        link: evt.target.value
-      })
-    },
-    render: function(){
-      return(
-        h('section.form',[
-          h('form',[
-            h('div',[
-              h('label','Title'),
-              h('input',{onChange: this.updateTitleVal})
-            ]),
-            h('div',[
-              h('label','Link'),
-              h('input',{onChange: this.updateLinkVal})
-            ]),
-            h('div',[
-              h('button',{onClick: this.onSubmit},'Add News')
+    render: function() {
+        return (
+            h('section.form', [
+                h('form', [
+                    h('div', [
+                        h('label', 'Title'),
+                        h('input', {
+                            onChange: this.setTitle,
+                            value: this.state.title
+                        })
+                    ]),
+                    h('div', [
+                        h('label', 'Link'),
+                        h('input', {
+                            onChange: this.setLink,
+                            value: this.state.link
+                        })
+                    ]),
+                    h('div', [
+                        h('button', {
+                            onClick: this.onSubmit
+                        }, 'Add News')
+                    ])
+                ])
             ])
-          ])
-         ])
-    )
-  }
+        )
+    }
 })
 
 module.exports = Form
