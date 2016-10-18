@@ -25,7 +25,7 @@ const App = React.createClass({
     }),
     scoreChanged: function(item) {
         this.setState({
-            items
+            items: this.state.items
         })
     },
     addArticle: function(newItem) {
