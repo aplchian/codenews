@@ -1,14 +1,17 @@
 const h = require('react-hyperscript')
+const React = require('react')
+const ListItem = require('./ListItem.js')
 
-module.exports = ({items}) => h('main',[
-  h('section.list', [
-    h('ul',items.map(item =>
-      h('li',[
-      h('a',{href: item.link},item.title),
-      h('button','Up'), //takes array or string.. wont take component*
-      h('button','Down'),
-      h('span',item.score)
+const List = React.createClass({
+  render: function(){
+    return h('main',[
+      h('section.list', [
+        h('ul',this.props.items.map(item =>
+          h(ListItem,{item, onScoreChange: this.props.onScoreChange})
+      ))
+     ])
     ])
-  ))
-])
-])
+   }
+ })
+
+module.exports = List
