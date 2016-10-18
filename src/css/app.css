@@ -1,1 +1,6 @@
 @import "tachyons";
+
+
+button {
+  float: right !important;
+}
